@@ -1,0 +1,332 @@
+\documentclass[letterpaper,11pt]{article}
+\pdfoutput=1
+%\hyphenpenalty=500
+%\widowpenalty=1000
+%\clubpenalty=500
+
+% packages
+%\usepackage{jheppub}
+\usepackage{mathtools,amssymb,braket,mathrsfs,tikz,subfig,xspace,xcolor,float,color,siunitx,comment,afterpage,multirow,array,hhline,amsthm,framed}
+\usepackage[utf8]{inputenc}
+\usepackage[countmax]{subfloat}
+
+% bib style
+%\bibliographystyle{JHEP}
+
+%\usepackage{graphicx,rotating,amsmath,amssymb,xcolor,upgreek,cancel,placeins,url}[h]
+\usepackage{fullpage}
+\usepackage{afterpage}
+\usepackage{pdfpages}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{blindtext}
+\usepackage{hyperref}
+\usepackage{cite}
+
+\title{EFT Wilson Coefficent Conversions}
+\date{}
+\author{Lukas Lechner, Robert Sch\"ofbeck}
+
+\begin{document}
+\maketitle
+\noindent
+
+\tableofcontents
+\clearpage
+\section{Conversions in \texttt{dim6top}}
+\subsection{C$_\text{tB}$ to C$_\text{tZ}$ conversion}
+\label{sec:ctb}
+\noindent
+Basis transformation of the Wilson coefficient C$_\text{tB}$ to C$_\text{tZ}$ using the Weinberg angle~$\theta_W$ and $\sin\theta_W~\approx~0.471$
+\begin{align}
+	C_\text{tZ}  &= \textrm{Re}\left( -\sin\theta_{W} C_\text{tB} + \cos\theta_{W} C_\text{tW}\right),
+\end{align}
+
+\noindent
+where only one Wilson coefficient at a time is used, thus for the conversion of C$_\text{tB}$ to C$_\text{tZ}$, the coefficent C$_\text{tW}$ is set to 0.
+\begin{align}
+	C_\text{tZ} = \textrm{Re}\left(-\sin\theta_{W}\,C_\text{tB}\right) \approx -0.471\,C_\text{tB}
+\end{align}
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{C$_\text{tB}$ limits translate to C$_\text{tZ}$ limits with a factor of $\approx$ -0.471}
+    }%
+}
+
+\subsection{C$_{\phi\text{Q}}$ conversion}
+\label{sec:cpQM}
+\noindent
+In the \texttt{FeynRules} model \texttt{dim6top}, a linear combination of Wilson coefficients is used to parametrize the Z boson coupling. The coefficent \texttt{cpQM} is given as
+\begin{align}
+	C^-_{\phi Q} = C_{\phi q}^{1(33)} - C_{\phi q}^{3(33)},
+\end{align}
+
+\noindent
+where additionally \texttt{cpQ3} is defined as $C_{\phi q}^{3(33)}$.
+If \texttt{cpQM} is the only Wilson coefficient set to non-zero, its definition reduces to
+\begin{align}
+	C^-_{\phi Q} = C_{\phi q}^{1(33)}
+\end{align}
+
+\noindent
+which removes effects of \texttt{cpQM} on the tWb vertex, but adds effects on the bbZ coupling.
+This can be seen in the operator definitions of the processes
+
+\begin{align}
+	O_{\phi q}^{1(ij)} &= (\phi^\dag i\overleftrightarrow{D_\mu}\phi)(\bar{q}_i\gamma^\mu q_j)\\
+	O_{\phi q}^{3(ij)} &= (\phi^\dag  i\overleftrightarrow{D_\mu}^I\phi)(\bar{q}_i\gamma^\mu \tau^I q_j)
+\end{align}
+
+\noindent
+where $\tau^I$ are the Pauli matrices and thus, $O_{\phi q}^{3(ij)}$ introduces anomalous couplings to the W boson.
+\clearpage
+
+\section{Conversion of ATLAS Wilson coefficients}
+ATLAS presented ttZ limits on EFT in the talk of Ref.~\cite{ATLAS:Top2018}.
+However different definitions of the operators~$\mathcal{O}$ are used in ATLAS~\cite{Bylund:2016phk} compared to CMS~\cite{AguilarSaavedra:2018nen}, leading to a scale factor for the Wilson coefficients.
+
+\subsection{C$_\text{tB}$ conversion: ATLAS vs. CMS}
+\label{sec:ATLAS_CMS_tB}
+
+To convert the definitions, the Lagrangians have to be equal.
+\begin{align}
+	C_\text{tB}^\text{ATLAS}\,\mathcal{O}^\text{ATLAS}_\text{tB} &\stackrel{!}{=} C_\text{tB}^\text{CMS}\,\mathcal{O}^\text{CMS}_\text{tB}\label{eq:op_eq}\\
+	\mathcal{O}^\text{CMS}_\text{tB} &= \left(\bar{Q}\sigma^{\mu\nu}t\right)\tilde{\phi}B_{\mu\nu}\\
+	\mathcal{O}^\text{ATLAS}_\text{tB} &= y_t\,g_Y\,\left(\bar{Q}\sigma^{\mu\nu}t\right)\tilde{\phi}B_{\mu\nu} = y_t\,g_Y\,\mathcal{O}^\text{CMS}_\text{tB}.\label{eq:op_Atlas_CMS}
+\end{align}
+
+\noindent
+Using Eq.~\ref{eq:op_eq} and Eq.~\ref{eq:op_Atlas_CMS} leads to
+\begin{align}
+	C_\text{tB}^\text{CMS} &= y_t\,g_Y C_\text{tB}^\text{ATLAS}
+\end{align}
+
+\noindent
+where $y_t=\frac{\sqrt{2}m_t}{v}$. Using the definitions from Ref.~\cite{Bylund:2016phk}
+\begin{align*}
+	m_t &= 173.3~\text{GeV}\\
+	\alpha_\text{EW} &= \frac{1}{127.9}\\
+	v &= 246~\text{GeV}\\
+	\tan\theta_W &= \frac{g_1}{g_2} = 0.535\\
+	\alpha &= \frac{1}{4\pi}\frac{(g_1g_2)^2}{g_1^2+g_2^2} = \frac{g_1^2}{4\pi(1+\tan^2\theta_W)} = \frac{g_1^2\cos^2\theta_W}{4\pi} = \frac{1}{127.9}\\
+	g' &= g_1 = g_Y = \sqrt{4\pi\alpha(1+\tan^2\theta_W)} = \frac{\sqrt{4\pi\alpha}}{\cos\theta_W} \approx 0.34\\
+	g &= g_2 = g_w = \frac{g_1}{\tan\theta_W} \approx 0.636\\
+	y_t &= \frac{\sqrt{2}m_t}{v} \approx 0.996
+\end{align*}
+
+\noindent
+leads to a conversion factor for $C_\text{tB}$ from ATLAS to CMS of
+\begin{align}
+C_\text{tB}^\text{CMS} &= y_t\,g_Y C_\text{tB}^\text{ATLAS} \approx 0.34 \, C_\text{tB}^\text{ATLAS}
+\end{align}
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{The ATLAS C$_\text{tB}$ limits translates to limits used in CMS with a factor of $\approx$ 0.34}
+    }%
+}
+
+\subsubsection{Total conversion from C$_\text{tB}^\text{ATLAS}$ to C$_\text{tZ}^\text{CMS}$ limits}
+
+To convert from C$_\text{tB}^\text{ATLAS}$ to C$_\text{tZ}^\text{CMS}$, an additional conversion factor for C$_\text{tB}$ to C$_\text{tZ}$ from Sec.~\ref{sec:ctb} has to be applied.
+\begin{align}
+	C_\text{tZ}^\text{CMS} = -\sin\theta_{W}\,y_t\,g_Y C_\text{tB}^\text{ATLAS} \approx -0.16\,C_\text{tB}^\text{ATLAS}
+\end{align}
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{The ATLAS C$_\text{tB}$ limits translates to CMS C$_\text{tZ}$ limits with a factor of $\approx$ -0.16}
+    }%
+}
+
+\subsubsection{Conversion of ATLAS ttZ C$_\text{tB}^\text{ATLAS}$ limits}
+
+The presented ttZ ATLAS C$_\text{tB}^\text{ATLAS}$ limits of Ref.~\cite{ATLAS:Top2018} convert to CMS C$_\text{tZ}^\text{CMS}$ limits as
+\begin{align}
+	C_\text{tZ}^\text{ATLAS$\rightarrow$ CMS}(36.1~\text{fb}^{-1}, 95\%, \text{x-sec only}):\, [-2.40,+2.40]
+\end{align}
+
+
+\subsection{C$_\text{tW}$ conversion: ATLAS vs. CMS}
+\label{sec:ATLAS_CMS_tW}
+
+To convert the definitions, the Lagrangians have to be equal.
+\begin{align}
+	C_\text{tW}^\text{ATLAS}\,\mathcal{O}^\text{ATLAS}_\text{tW} &\stackrel{!}{=} C_\text{tW}^\text{CMS}\,\mathcal{O}^\text{CMS}_\text{tW}\label{eq:op_eqW}\\
+	\mathcal{O}^\text{CMS}_\text{tW} &= (\bar{q}_i\sigma^{\mu\nu}\tau^Iu_j)\tilde{\phi}W_{\mu\nu}^I\\
+	\mathcal{O}^\text{ATLAS}_\text{tW} &= y_t\,g_w\,(\bar{q}_i\sigma^{\mu\nu}\tau^Iu_j)\tilde{\phi}W_{\mu\nu}^I = y_t\,g_w\,\mathcal{O}^\text{CMS}_\text{tW}\label{eq:op_Atlas_CMSW}
+\end{align}
+
+\noindent
+Using Eq.~\ref{eq:op_eqW} and Eq.~\ref{eq:op_Atlas_CMSW} leads to
+\begin{align}
+	C_\text{tW}^\text{CMS} &= y_t\,g_w C_\text{tW}^\text{ATLAS} \approx 0.633 \, C_\text{tW}^\text{ATLAS}
+\end{align}
+
+\noindent
+where $y_t=\frac{\sqrt{2}m_t}{v}\approx 0.996$ and $g_w \approx 0.636$ (see Sec.~\ref{sec:ATLAS_CMS_tB}).\\
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{The ATLAS C$_\text{tW}$ limits translates to limits used in CMS with a factor of $\approx$ 0.633}
+    }%
+}
+
+\subsection{C$_{\phi\text{t}}$ and C$_{\phi\text{Q}}$ conversion: ATLAS vs. CMS}
+\label{sec:ATLAS_CMS_pQ}
+
+%There is no conversion factor for C$_{\phi\text{t}}$, C$_{\phi\text{Q}}^\text{(1)}$, C$_{\phi\text{Q}}^\text{(3)}$ and C$_{\phi\text{Q}}$.\\
+
+%\noindent
+%\fbox{%
+%    \parbox{\textwidth}{%
+%		\centering \textbf{The ATLAS C$_{\phi\text{t}}$, C$_{\phi\text{Q}}^\text{(1)}$, C$_{\phi\text{Q}}^\text{(3)}$ and C$_{\phi\text{Q}}$ limits translate to limits used in CMS with a factor of 1.0.}
+%    }%
+%}
+
+To convert the definitions, the Lagrangians have to be equal.
+\begin{align}
+	C_{\phi\text{t}}^\text{ATLAS}\,\mathcal{O}^\text{ATLAS}_{\phi\text{t}} &\stackrel{!}{=} C_{\phi\text{t}}^\text{CMS}\,\mathcal{O}^\text{CMS}_{\phi\text{t}}\label{eq:op_eqPhi}\\
+	\mathcal{O}^\text{CMS}_{\phi\text{t}} &= (\phi^\dag i\overleftrightarrow{D_\mu}\phi)(\bar{t}\gamma^\mu t)\\
+	\mathcal{O}^\text{ATLAS}_{\phi\text{t}} &= \frac{1}{2}y_t^2\,(\phi^\dag i\overleftrightarrow{D_\mu}\phi)(\bar{t}\gamma^\mu t) = \frac{1}{2}y_t^2\,\mathcal{O}^\text{CMS}_{\phi\text{t}}\label{eq:op_Atlas_CMSPhi}
+\end{align}
+
+\noindent
+However, the factor $\frac{1}{2}$ cancels, as the definition of ATLAS~\cite{Bylund:2016phk} includes the hermitian conjugate state in the Lagrangian, where the CMS definitions~\cite{AguilarSaavedra:2018nen} uses the fact that these operators are hermitian.
+Thus, using Eq.~\ref{eq:op_eqPhi} and Eq.~\ref{eq:op_Atlas_CMSPhi} leads to
+\begin{align}
+	C_{\phi\text{t}}^\text{CMS} &= y_t^2\,C_{\phi\text{t}}^\text{ATLAS} \approx 0.992\,C_{\phi\text{t}}^\text{ATLAS}
+\end{align}
+
+\noindent
+where $y_t=\frac{\sqrt{2}m_t}{v}\approx 0.996$ (see Sec.~\ref{sec:ATLAS_CMS_tB}).
+The same pre-factor is applied to C$_{\phi\text{Q}}^{(1)}$ and C$_{\phi\text{Q}}^{(3)}$, thus C$_{\phi\text{Q}}$.\\
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{The ATLAS C$_{\phi\text{t}}$, C$_{\phi\text{Q}}^\text{(1)}$, C$_{\phi\text{Q}}^\text{(3)}$ and C$_{\phi\text{Q}}$ limits translate to limits used in CMS with a factor of 0.992.}
+    }%
+}
+
+
+
+\clearpage
+
+\section{Conversion of HEL UFO Wilson coefficients}
+Comparison of the Wilson coefficients using couplings of Lagrangians from the \texttt{couplings.py} files in the \texttt{FeynRules} directories for the \texttt{dim6top-} and \texttt{HEL-UFO} models. 
+Here, only an example of one coupling for one Lagrangian is used to show the conversion factor, where the Lagrangians are labeled similar to the definitions in the \texttt{couplings.py} file (GC \#).
+
+
+\subsection{C$_\text{tB}$ to C$_\text{tZ}$ conversion}
+
+\begin{align}
+	g(\mathcal{L}_\text{dim6}, \text{GC 664}) &= \frac{C_\text{tZ}}{\Lambda^2\sqrt{2}}\\
+	g(\mathcal{L}_\text{HEL}, \text{GC 2191}) &= \frac{\sqrt{4\pi\alpha_\text{EW}}\,y_t}{M_W^2\sqrt{2}} \left(C_\text{uB}\frac{\sin\theta_W}{\cos\theta_W} - C_\text{uW}\frac{\cos\theta_W}{\sin\theta_W}\right)\\
+	g(\mathcal{L}_\text{dim6}) &\stackrel{!}{=} g(\mathcal{L}_\text{HEL})
+\end{align}
+
+\noindent
+but only one Wilson coefficient at a time is used, thus C$_\text{uW}=0$, leading to a direct comparison of $C_\text{tZ}$ and $C_\text{uB}$ (see Sec.~\ref{sec:ctb}):
+\begin{align}
+	\frac{C_\text{tZ}}{\Lambda^2} = -C_\text{uB}\frac{\sqrt{4\pi\alpha_\text{EW}}\,y_t}{M_W^2}\frac{\sin\theta_W}{\cos\theta_W}
+	%C_\text{tZ} = C_\text{uB}\frac{\sqrt{4\pi\alpha_\text{EW}}\,y_t\,\Lambda^2}{M_W^2}\frac{\sin\theta_W}{\cos\theta_W}
+\end{align}
+
+\noindent
+A second example is the comparison of the Lagrangians $g(\mathcal{L}_\text{dim6}, \text{GC 948})$ and $g(\mathcal{L}_\text{HEL}, \text{GC 2187})$, leading to the same results.
+Even though it may look reasonable to compare the Lagrangian in switched order (DIM6: GC 664 $\leftrightarrow$ HEL: GC 2187, DIM6: GC 948 $\leftrightarrow$ HEL: GC 2187), the results are then not consistant.
+
+\subsubsection{Comparison of Limits in Top 17-005}
+
+In Ref.~\cite{Sirunyan:2017uzs}, a factor~$k$ is applied to the presented limits, where $k$ is taken from Ref.~\cite{annawoodardgithub}. %Furthermore, the limits are presented in the form $\bar{C}_\text{uB} / \Lambda^2\,[\text{TeV}^{-2}]$
+\begin{align}
+k &= \frac{\sqrt{4\pi\alpha_\text{EW}}\,y_t}{2\,M_W^2\,\cos\theta_W}\\
+\bar{C}_\text{uB} &= C_\text{uB}\,k = C_\text{uB}\,\frac{\sqrt{4\pi\alpha_\text{EW}}\,y_t}{2\,M_W^2\,\cos\theta_W}
+%\bar{C}_\text{uB} / \Lambda^2 &= C_\text{uB}\frac{k}{\Lambda^2} = C_\text{uB}\,\frac{\sqrt{4\pi\alpha_\text{EW}}\,y_t}{2\,M_W^2\,\cos\theta_W\,\Lambda^2}
+\end{align}
+
+\noindent
+To compare the limits to current efforts using the \texttt{dim6top} model, the conversion factor is thus
+
+\begin{align}
+\rightarrow \frac{C_\text{tZ}}{\Lambda^2} = -2\,\sin\theta_W\,\bar{C}_\text{uB} = -0.96\,\bar{C}_\text{uB}
+%\rightarrow \frac{C_\text{tZ}}{\Lambda^2}\,[\text{TeV}^{-2}] &= C_\text{tZ}\,[(\Lambda/\text{TeV})^{2}] = -2\,\sin\theta_W\,\bar{C}_\text{uB}\,[\text{TeV}^{-2}]
+\end{align}
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{The HEL UFO $\bar{\text{C}}_\text{uB}$ limits in Ref.~\cite{Sirunyan:2017uzs} translate to limits of C$_\text{tZ}$ with a factor of -0.96}\\
+    }%
+}
+%\textbf{The HEL UFO $\bar{\text{C}}_\text{uB}$ limits in Ref.~\cite{Sirunyan:2017uzs} translate to limits of C$_\text{uB}$ with a factor of 2}
+
+\subsubsection{Conversion of Top 17-005 $\bar{\text{C}}_\text{uB}$ limits}
+
+Thus, the presented ttZ $\bar{\text{C}}_\text{uB}$ limits of Ref.~\cite{Sirunyan:2017uzs} convert to \texttt{dim6top} limits as
+\begin{align}
+\text{C}_\text{tZ}^\text{Top 17-005$\rightarrow$ dim6top}(36.1~\text{fb}^{-1}, 95\%, \text{x-sec only}):\, [-2.02,+2.02]
+\end{align}
+
+\subsection{C$_\text{Hu}$ to C$_\text{$\phi$t}$ conversion}
+
+\begin{align}
+	g(\mathcal{L}_\text{dim6}, \text{GC 1112}) &= -i\frac{C_{\phi\text{t}}\,\cos\theta_W\,\sqrt{4\,\alpha_\text{EW}\pi}\,v}{\Lambda^2\,\sin\theta_W} - i\frac{C_{\phi\text{t}}\,\sqrt{4\,\alpha_\text{EW}\pi}\,\sin\theta_W\,v}{\cos\theta_W\,\Lambda^2}\\
+	g(\mathcal{L}_\text{HEL}, \text{GC 1136}) &= -i\frac{C_\text{Hu}\,\cos\theta_W\,\sqrt{4\,\alpha_\text{EW}\pi}}{\sin\theta_W\,v} - i\frac{C_\text{Hu}\,\sqrt{4\,\alpha_\text{EW}\pi}\,\sin\theta_W}{\cos\theta_W\,v}\\
+	g(\mathcal{L}_\text{dim6}) &\stackrel{!}{=} g(\mathcal{L}_\text{HEL})\\
+	\rightarrow \frac{C_{\phi\text{t}}}{\Lambda^2} &= \frac{C_\text{Hu}}{v^2}
+	%\rightarrow \frac{1}{2}\,\underbrace{\frac{C_{\phi\text{t}}\,v^2}{\Lambda^2}}_\text{limits on \texttt{cpt}} &= \underbrace{\frac{C_\text{Hu}}{v^2}}_\text{limits on \texttt{cHu}}
+\end{align}
+
+
+\subsubsection{Comparison of Limits in Top 17-005}
+
+In Ref.~\cite{Sirunyan:2017uzs}, a factor~$k$ is applied to the presented limits, where $k$ is taken from Ref.~\cite{annawoodardgithub}.  %Furthermore, the limits are presented in the form $\bar{C}_\text{Hu} / \Lambda^2\,[\text{TeV}^{-2}]$
+\begin{align}
+k &= \frac{1}{2\,v^2}\\
+\bar{C}_\text{Hu} &= C_\text{Hu}\,k = \frac{C_\text{Hu}}{2\,v^2}
+%\bar{C}_\text{Hu} / \Lambda^2 &= \frac{C_\text{Hu}}{k\,\Lambda^2} = C_\text{Hu}\frac{2\,v^2}{\Lambda^2}
+\end{align}
+
+\noindent
+To compare the limits to current efforts using the \texttt{dim6top} model, the conversion factor is thus
+
+\begin{align}
+\rightarrow \frac{C_{\phi\text{t}}}{\Lambda^2} &= 2\,\bar{C}_\text{Hu}
+%\rightarrow \frac{C_{\phi\text{t}}}{\Lambda^2}\,[\text{TeV}^{-2}] &= C_{\phi\text{t}}\,[(\Lambda/\text{TeV})^{2}] = 2\,\bar{C}_\text{Hu}\,[(\Lambda/\text{TeV})^{2}] = 2\frac{\bar{C}_\text{Hu}}{\Lambda^2}\,[\text{TeV}^{-2}]
+\end{align}
+
+\noindent
+\fbox{%
+    \parbox{\textwidth}{%
+		\centering \textbf{The HEL UFO $\bar{\text{C}}_\text{Hu}$ limits in Ref.~\cite{Sirunyan:2017uzs} translate to limits of C$_{\phi\text{t}}$ with a factor of 2.0}\\
+    }%
+}
+
+\subsubsection{Conversion of Top 17-005 $\bar{\text{C}}_\text{Hu}$ limits}
+Thus, the presented ttZ $\bar{\text{C}}_\text{Hu}$ limits of Ref.~\cite{Sirunyan:2017uzs} convert to \texttt{dim6top} limits as
+\begin{align}
+\text{C}_{\phi\text{t}}^\text{Top 17-005$\rightarrow$ dim6top}(36.1~\text{fb}^{-1}, 95\%, \text{x-sec only}):\, [-20.2, +4.0]
+\end{align}
+
+%where $C_{\phi\text{t}}$ is dimensionless, however typically it is given as $C_{\phi\text{t}}\,v^2/\Lambda^2$, in units of [(TeV/$\Lambda$)$^2$]. $C_\text{Hu}$ has units of [TeV$^{2}$], which often, as e.g. in Ref.~\cite{Sirunyan:2017uzs}, is converted to the dimensionless variable $\bar{C}_\text{Hu}$, with
+%\begin{align}
+%\bar{C}_\text{Hu} = \frac{C_\text{Hu}}{v^2}
+%\end{align}
+%where limits are given in the form $\bar{C}_\text{Hu}/\Lambda^2$ in units of $[\text{TeV}^{-2}]$ or on $\bar{C}_\text{Hu}$ in units of $[(\Lambda/\text{TeV})^{-2}]$. The limits in this notation are then consistant with $C_{\phi\text{t}}$~[($\Lambda$/TeV)$^2$], however with the conversion factor
+%\begin{align}
+%C_{\phi\text{t}}\,[(\Lambda/\text{TeV})^2] &= 2\,\bar{C}_\text{Hu}\,[(\Lambda/\text{TeV})^{-2}]
+%\end{align}
+%\noindent
+
+\clearpage
+
+\bibliographystyle{unsrt}
+\bibliography{biblio}
+\end{document}
